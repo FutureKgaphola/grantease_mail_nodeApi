@@ -9,7 +9,7 @@ const { senduserMail } = require('./utils/sendEmail');
 const app = express(); 
 const PORT = process.env.APP_PORT; 
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 var corsOptions = {
   origin: process.env.FRONTDOMAIN,
   optionsSuccessStatus: 200
