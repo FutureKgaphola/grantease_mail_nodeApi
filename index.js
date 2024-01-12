@@ -9,12 +9,12 @@ const { senduserMail } = require('./utils/sendEmail');
 const app = express(); 
 const PORT = process.env.APP_PORT; 
 
-//app.use(bodyParser.json());
-var corsOptions = {
-  origin: process.env.FRONTDOMAIN,
-  optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions));
+app.use(bodyParser.json());
+// var corsOptions = {
+//   origin: process.env.FRONTDOMAIN,
+//   optionsSuccessStatus: 200
+// }
+// app.use(cors(corsOptions));
 app.get('/', (req, res)=>{ 
     res.status(200); 
     res.send("Welcome to root URL of Server"); 
