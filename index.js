@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const { senduserMail } = require('./utils/sendEmail');
+const { sendSMS } = require("./utils/sendSms");
 
 const app = express(); 
 const PORT = process.env.APP_PORT; 
@@ -40,7 +41,25 @@ app.post('/sendemail', (req, res)=>{
   .catch((ex) => {
     res.status(404).json(ex); 
   }); 
-}) 
+});
+
+app.post('/sendsms', (req, res)=>{
+  checkInternetConnected()
+  .then((result) => {
+    if(result){
+      const {paydate} = req.body; 
+      sendSMS(paydate).then(()=>{
+        res.json({"smsdelivery":"succesfully deliverd sms"}); 
+      }).catch((err)=>{
+        res.status(404).json(err);
+      })
+    }
+  }).catch((ex) => {
+    res.status(404).json(ex); 
+  });
+    
+  
+});
 
 app.listen(PORT, (error) =>{ 
 	if(!error) 
